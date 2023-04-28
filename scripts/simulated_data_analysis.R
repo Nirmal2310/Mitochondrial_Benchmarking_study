@@ -11,7 +11,7 @@ df$Tool <- factor(df$Tool,levels=c("ARC","GetOrganelle","IOGA","MEANGS", "Mitobi
 my_col=brewer.pal(10,"Set3")
 
 # Computational Time
-df %>% ggplot(aes(y=Time,x=Tool, color=as.factor(Threads))) +
+df %>% ggplot(aes(y=log(Time),x=Tool, color=as.factor(Threads))) +
   geom_quasirandom(size=1.9 ) + theme_bw()  + scale_color_manual(values=my_col[c(1,3,7,10)]) +
   geom_boxplot(notch=F,alpha=0.3,width=0.2,color="black",fill="#c0c0c0",outlier.shape=NA) +
   theme(text = element_text(size=15)) +  
@@ -19,7 +19,7 @@ df %>% ggplot(aes(y=Time,x=Tool, color=as.factor(Threads))) +
   facet_grid(Reads~.) +
   guides(color=guide_legend(title="Threads")) +
   xlab("Assembler") +
-  ylab("Execution Time (Seconds)") + 
+  ylab("log(Execution Time (Seconds))") + 
   scale_y_log10()
 
 # Peak CPU Usage
