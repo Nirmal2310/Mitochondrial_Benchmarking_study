@@ -19,8 +19,7 @@ df %>% ggplot(aes(y=log(Time),x=Tool, color=as.factor(Threads))) +
   facet_grid(Reads~.) +
   guides(color=guide_legend(title="Threads")) +
   xlab("Assembler") +
-  ylab("log(Execution Time (Seconds))") + 
-  scale_y_log10()
+  ylab("log(Execution Time (Seconds))")
 
 # Peak CPU Usage
 
