@@ -33,7 +33,7 @@ write.csv(original_perfect,file = "original_score.csv",row.names = FALSE)
 #Upset plot
 
 UL  = mutated_real_Original %>% filter(score.x>99)  %>% select(dataset,assembler) %>% split(.$assembler) %>% lapply("[[",1)
-upset(fromList(UL), order.by = "freq",sets.bar.color=my_col_real[c(4,3,6,7,2,9,5,1)],
+upset(fromList(UL), order.by = "freq",sets.bar.color=my_col_real[c(2,3,4,6,7,8,9,10)],
       point.size=5,matrix.color = my_col_real[3],
       shade.alpha = 0.5, text.scale = 1.5,nsets = 10)
 
@@ -79,7 +79,7 @@ n_obs_40X
 perfect_40X <- mutated_real_40X %>% filter(score.x>99)  %>% select(dataset,assembler)
 write.csv(perfect_40X,file = "40X_perfect.csv", row.names = FALSE)
 UL  = mutated_real_40X %>% filter(score.x>99)  %>% select(dataset,assembler) %>% split(.$assembler) %>% lapply("[[",1)
-upset(fromList(UL), order.by = "freq",sets.bar.color=my_col_real[c(4,3,6,7,2,9,5,1)],
+upset(fromList(UL), order.by = "freq",sets.bar.color=my_col_real[c(2,3,4,6,7,8,9,10)],
       point.size=5,matrix.color = my_col_real[3],
       shade.alpha = 0.5, text.scale = 1.5,nsets = 10)
 
@@ -126,7 +126,7 @@ write.csv(perfect_40X,file = "40X_perfect.csv", row.names = FALSE)
 #Upset plot
 
 UL  = mutated_real_30X %>% filter(score.x>99)  %>% select(dataset,assembler) %>% split(.$assembler) %>% lapply("[[",1)
-upset(fromList(UL), order.by = "freq",sets.bar.color=my_col_real[c(4,3,6,7,2,9,5,1)],
+upset(fromList(UL), order.by = "freq",sets.bar.color=my_col_real[c(2,3,4,6,7,8,9,10)],
       point.size=5,matrix.color = my_col_real[3],
       shade.alpha = 0.5, text.scale = 1.5,nsets = 10)
 
@@ -172,7 +172,7 @@ write.csv(perfect_40X,file = "40X_perfect.csv", row.names = FALSE)
 #Upset plot
 
 UL  = mutated_real_20X %>% filter(score.x>99)  %>% select(dataset,assembler) %>% split(.$assembler) %>% lapply("[[",1)
-upset(fromList(UL), order.by = "freq",sets.bar.color=my_col_real[c(4,3,6,7,2,9,5,1)],
+upset(fromList(UL), order.by = "freq",sets.bar.color=my_col_real[c(2,3,4,6,7,8,9,10)],
       point.size=5,matrix.color = my_col_real[3],
       shade.alpha = 0.5, text.scale = 1.5,nsets = 10)
 
@@ -219,7 +219,7 @@ write.csv(perfect_40X,file = "40X_perfect.csv", row.names = FALSE)
 #Upset plot
 
 UL  = mutated_real_10X %>% filter(score.x>99)  %>% select(dataset,assembler) %>% split(.$assembler) %>% lapply("[[",1)
-upset(fromList(UL), order.by = "freq",sets.bar.color=my_col_real[c(4,3,6,7,2,9,5,1)],
+upset(fromList(UL), order.by = "freq",sets.bar.color=my_col_real[c(2,3,4,6,7,8,9,10)],
       point.size=5,matrix.color = my_col_real[3],
       shade.alpha = 0.5, text.scale = 1.5,nsets = 10)
 
@@ -233,3 +233,14 @@ score_summary_10X <- mutated_real_10X %>% drop_na(score.x) %>%
             N_tot = length(score.x))
 score_10X <- xtable(score_summary_10X)
 print.xtable(score_10X, type="html", file="10X_score.html")
+
+# F Score Plot
+f_score_matrix <- read.table(file="SNP calling Analysis.csv", sep = ",", header = TRUE)
+f_score_matrix %>% ggplot(aes(y=F.score,x=Assembler, color=as.factor(Assembler))) +
+  geom_quasirandom(size=1.9 ) + theme_bw()  + scale_color_manual(values=my_col_real[c(2,3,4,6,7,8,9,10)]) +
+  geom_boxplot(notch=F,alpha=0.3,width=0.2,color="black",fill="#c0c0c0",outlier.shape=NA) +
+  theme(text = element_text(size=15)) +  
+  theme(axis.text.x=element_text(size=rel(0.8), angle=0)) +
+  facet_grid(as.factor(Depth)~.) +
+  guides(color=guide_legend(title="Threads")) +
+  ylab("F1 Score")
