@@ -3,7 +3,7 @@ sapply(required_tools,function(x){if(!require(x,character.only = T)){install.pac
 
 ##Original
 
-res_real_Original <- read.delim("Original.tsv", sep = "\t")
+res_real_original <- read.delim("Original.tsv", sep = "\t")
 mutated_real_original <- res_real_original %>% mutate(rep_res = exp(-abs(log(qry_cov/ref_cov)))) %>%
   mutate(score =  (1 - ((abs(1-ref_cov_frac)/4) + (abs(1-qry_cov_frac)/4) + (abs(1-rep_res)/4) + (abs(1-(1/contig_num))/4)))*100) %>% replace(is.na(.), 0)
 ds_real_original_list = mutated_real_original %>% distinct(dataset)  %>% pull
