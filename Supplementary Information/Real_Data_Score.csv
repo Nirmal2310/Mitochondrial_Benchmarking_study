@@ -1,4 +1,4 @@
-Dataset,Sequecing Depth,Score,Mean Sequencing Depth
+Dataset,Assembler,Score,Mean Sequencing Depth
 ERR194146,ARC,29.57135,52.2025
 ERR194147,ARC,25.28175,51.3741
 ERR194158,ARC,29.93779,55.0723
