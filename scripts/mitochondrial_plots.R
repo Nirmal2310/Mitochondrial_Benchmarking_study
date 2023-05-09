@@ -242,5 +242,5 @@ f_score_matrix %>% ggplot(aes(y=F.score,x=Assembler, color=as.factor(Assembler))
   theme(text = element_text(size=15)) +  
   theme(axis.text.x=element_text(size=rel(0.8), angle=0)) +
   facet_grid(as.factor(Depth)~.) +
-  guides(color=guide_legend(title="Threads")) +
+  guides(color=guide_legend(title="Assembler")) +
   ylab("F1 Score")
